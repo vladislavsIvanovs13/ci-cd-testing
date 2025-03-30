@@ -1,0 +1,12 @@
+{
+  "name": "ci-cd-testing",
+  "version": "1.0.0",
+  "description": "CI/CD assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "pm2":"6.0.5"
+  }
+}
