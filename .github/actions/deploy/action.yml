@@ -1,0 +1,30 @@
+name: "Deploy python-greetings"
+description: "Composite action to deploy python-greetings app using pm2"
+inputs:
+  environment:
+    description: 'Environment to deploy python-greetings application to'
+    required: true
+  port:
+    description: 'Port for python-greetings application'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Print step name
+      run: echo "Deploying to ${{ inputs.environment }}..."
+      shell: powershell
+
+    - name: Install dependencies
+      run: |
+        npm init -y
+        npm install pm2
+        dir
+      shell: powershell
+
+    - name: Delete existing pm2 service
+      run: node_modules\\.bin\\pm2 delete "greetings-app-${{ inputs.environment }}" & EXIT /B 0
+      shell: cmd
+
+    - name: Start python-greetings pm2 service
+      run: node_modules\\.bin\\pm2 start python-greetings/app.py --name "greetings-app-${{ inputs.environment }}" -- --port ${{ inputs.port }}
+      shell: cmd

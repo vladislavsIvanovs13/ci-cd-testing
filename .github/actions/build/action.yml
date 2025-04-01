@@ -1,0 +1,13 @@
+name: "Install pip dependencies"
+description: "Composite action to install all required pip dependencies"
+runs:
+  using: composite
+  steps:
+    - name: Print step name
+      run: echo "Installing pip dependencies..."
+      shell: powershell
+
+    - name: Install pip dependencies
+      working-directory: python-greetings
+      run: pip install -r requirements.txt
+      shell: powershell
